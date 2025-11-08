@@ -31,11 +31,20 @@ while opcion != 0:
     print("6. Mostrar caracteristicas")
     print("0. Salir")
 
-    opcion = int(input("Seleccione una opción del 1 al 6, si quiere salir seleccion '0': "))
 
-    if not opcion.isdigit() or opcion < 0 or opcion > 6:
+  
+    opcion = (input("Seleccione una opción del 1 al 6, si quiere salir seleccion '0': "))
+
+    if not opcion.isdigit():
         print("No es una opcion valida, por favor ingresa una opcion del 1 al 7, o 0 si queres salir.")
         continue
+
+    opcion = int(opcion)
+
+    if opcion < 0 or opcion > 6:
+        print("No es una opcion valida, por favor ingresa una opcion del 1 al 7, o 0 si queres salir.")
+        continue
+    
 
     if opcion == 1:
        pass
