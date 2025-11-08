@@ -54,15 +54,34 @@ def seleccionar_continente():
         input_user = int(input("Seleccione un continente: "))
         return continentes[input_user - 1]
 
+def validador(variable):
+    while True:
+        if variable <= 0:
+            variable = int(input("Ingrese un número válido "))
+        else:
+            return variable
+        
 
+def ingresar_ejemplares():
+    nombre = input("Ingrese el nombre del título para agregar los ejemplares: ")
+    #Checkea si existe el libro
+    if existe_libro(nombre):
+        #Obtiene la lista de diccionarios
+        libros = obtener_libros()
+        #Busca en cada diccionario hasta dar con el título que coloca el usuario
+        for libro in libros:
+            if libro["TITULO"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
+                cantidad = int(input("Ingrese la cantidad de ejemplares que desea añadir: "))
+                #Añade la cantidad correspondiente ingresada por el usuario
+                libro["CANTIDAD"] += cantidad
+                #Guarda los cambios del CSV
+                guardar_cambios(libros)
 
+        print("Accion realizada con éxito")
 
-nombre = input("Ingrese el nombre del país: ").lower()
-cantidad_habitantes = int(input("ingrese la cantidad de habitantes: "))
-superficie = int(input("Ingrese la superficie del país expresada en metros cuadrados: "))
-continente = seleccionar_continente()
-pais = {"nombre": primera_mayuscula(nombre), "poblacion": cantidad_habitantes, "superficie": superficie, "continente": continente}
-ingresar_pais(pais)
+    else:    
+        print("El libro ingresado no existe: ")
+        return
 
 
 '''   
