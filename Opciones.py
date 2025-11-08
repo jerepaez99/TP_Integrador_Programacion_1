@@ -16,9 +16,11 @@
 # o Promedio de superficie
 # o Cantidad de países por continente
 """
-
-
+import csv
+from tp_integrador_1 import ingresar_pais, obtener_paises, seleccionar_continente, validador, primera_mayuscula
+resultado = None
 opcion = -1
+pais = ""
 
 while opcion != 0:
 
@@ -31,8 +33,6 @@ while opcion != 0:
     print("6. Mostrar caracteristicas")
     print("0. Salir")
 
-
-  
     opcion = (input("Seleccione una opción del 1 al 6, si quiere salir seleccion '0': "))
 
     if not opcion.isdigit():
@@ -44,16 +44,20 @@ while opcion != 0:
     if opcion < 0 or opcion > 6:
         print("No es una opcion valida, por favor ingresa una opcion del 1 al 7, o 0 si queres salir.")
         continue
-    
 
     if opcion == 1:
-       pass
+        nombre = input("Ingrese el nombre del país: ").lower()
+        cantidad_habitantes = validador(int(input("ingrese la cantidad de habitantes: ")))
+        superficie = validador(int(input("Ingrese la superficie del país expresada en metros cuadrados (expresado unicamente en numeros y sin caracteres especiales: ")))
+        continente = seleccionar_continente()
+        pais = {"nombre": primera_mayuscula(nombre), "poblacion": cantidad_habitantes, "superficie": superficie, "continente": continente}
+        ingresar_pais(pais)
 
     elif opcion == 2:
-       pass
+        pass
 
     elif opcion == 3:
-        pass
+       resultado = obtener_paises(pais)
 
     elif opcion == 4:
       pass
