@@ -10,11 +10,40 @@ import os
 NOMBRE_ARCHIVO = "datos.csv"
 
 continentes = [
-    "America",
+    "América",
     "Asia",
     "Europa",
     "Africa",
-    "Oceania"
+    "Oceanía"
+]
+
+rangos_poblacionales = [
+    "Menos de 1 millón (micro-naciones)",
+    "Entre 1 y 10 millones (países pequeños-medianos)",
+    "Entre 10 y 100 millones (países medianos-grandes)",
+    "Más de 100 millones (gigantes demográficos)"
+]
+
+tuplas_poblacionales = [
+    (0, 1000000),           # Menos de 1 millón         
+    (1000000, 10000000),        # Entre 1 y 10 millones
+    (10000000, 100000000),      # Entre 10 y 100 millones
+    (100_000_000, None)       # Más de 100 millones
+]
+
+
+rangos_superficie = [
+    "Menos de 10 000 km² (países muy pequeños)",
+    "Entre 10 000 y 100 000 km² (países pequeños-medianos)",
+    "Entre 100 000 y 1 000 000 km² (países medianos-grandes)",
+    "Más de 1 000 000 km² (países muy extensos)"
+]
+
+tuplas_superficie = [
+    (0, 10000),             # Menos de 10.000 km2
+    (10000, 100000),       # Entre 10.000 y 100.000 km2
+    (100000, 1000000),    # Entre 100.000 y 1.000.000 km2
+    (1000000, None)        # Más de 1.000.000 km2
 ]
 
 #El siguiente bloque de código consulta al archivo "catalogo.csv" y devuelve la lista de libros en forma de diccionarios "TITULO" - "CANTIDAD"
@@ -32,6 +61,12 @@ def obtener_paises():
         for fila in lector:
             paises.append({"nombre": fila["nombre"], "poblacion": int(fila["poblacion"]), "superficie": int(fila["superficie"]), "continente": fila["continente"]})
         return paises
+    
+def guardar_cambios(paises):
+  with open(NOMBRE_ARCHIVO, "w", newline="", encoding="utf-8") as archivo:
+    escritor = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
+    escritor.writeheader()
+    escritor.writerows(paises)
     
 
 
@@ -53,6 +88,47 @@ def seleccionar_continente():
             n += 1
         input_user = int(input("Seleccione un continente: "))
         return continentes[input_user - 1]
+    
+def seleccionar_poblacion():
+    input_user = ""
+    n = 1
+    while input_user == "":
+        for rango_poblacional in rangos_poblacionales:
+            print(f"{n}: {rango_poblacional}")
+            n += 1
+        input_user = int(input("Seleccione un rango poblacional: "))
+        rango = rangos_poblacionales[input_user - 1]
+        
+        match rango:
+            case "Menos de 1 millón (micro-naciones)":
+                return tuplas_poblacionales[0]
+            case "Entre 1 y 10 millones (países pequeños-medianos)":
+                return tuplas_poblacionales[1]
+            case "Entre 10 y 100 millones (países medianos-grandes)":
+                return tuplas_poblacionales[2]
+            case "Más de 100 millones (gigantes demográficos)":
+                return tuplas_poblacionales[3]
+            
+def superficie():
+    input_user = ""
+    n = 1
+    while input_user == "":
+        for rango_poblacional in rangos_poblacionales:
+            print(f"{n}: {rango_poblacional}")
+            n += 1
+        input_user = int(input("Seleccione un rango poblacional: "))
+        rango = rangos_poblacionales[input_user - 1]
+        
+        match rango:
+            case "Menos de 1 millón (micro-naciones)":
+                return tuplas_poblacionales[0]
+            case "Entre 1 y 10 millones (países pequeños-medianos)":
+                return tuplas_poblacionales[1]
+            case "Entre 10 y 100 millones (países medianos-grandes)":
+                return tuplas_poblacionales[2]
+            case "Más de 100 millones (gigantes demográficos)":
+                return tuplas_poblacionales[3]
+
 
 def validador(variable):
     while True:
@@ -60,31 +136,88 @@ def validador(variable):
             variable = int(input("Ingrese un número válido "))
         else:
             return variable
-        
 
-def ingresar_ejemplares():
-    nombre = input("Ingrese el nombre del título para agregar los ejemplares: ")
-    #Checkea si existe el libro
-    if existe_libro(nombre):
-        #Obtiene la lista de diccionarios
-        libros = obtener_libros()
-        #Busca en cada diccionario hasta dar con el título que coloca el usuario
-        for libro in libros:
-            if libro["TITULO"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
-                cantidad = int(input("Ingrese la cantidad de ejemplares que desea añadir: "))
-                #Añade la cantidad correspondiente ingresada por el usuario
-                libro["CANTIDAD"] += cantidad
-                #Guarda los cambios del CSV
-                guardar_cambios(libros)
+def existe_pais(nombre):
+  paises = obtener_paises()
+  for pais in paises:
+    if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
+      return True
+  return False
 
-        print("Accion realizada con éxito")
 
+def actualizar_datos():
+    nombre = input("Ingrese el nombre del pais para actualizar sus datos: ")
+    paises = obtener_paises()
+    #Checkea si existe el pais
+    if existe_pais(nombre):
+        input_usuario_actualizar = input("Seleccione 'p' si desea modificar la población o 's' modificar la superficie o 'a' si desea modificar ambas: ").lower().strip()
+        match input_usuario_actualizar:
+            case "p":
+                for pais in paises:
+                    if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
+                        cantidad_habitantes = validador(int(input("ingrese la nueva cantidad de habitantes: ")))
+                        pais["poblacion"] = cantidad_habitantes
+                        guardar_cambios(paises)
+                print("Accion realizada con éxito")
+            case "s":
+                for pais in paises:
+                    if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
+                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en metros cuadrados: ")))
+                        pais["superficie"] = superficie
+                        guardar_cambios(paises)
+                print("Accion realizada con éxito")
+            case "a":
+                for pais in paises:
+                    if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
+                        cantidad_habitantes = validador(int(input("ingrese la nueva cantidad de habitantes: ")))
+                        pais["poblacion"] = cantidad_habitantes
+                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en metros cuadrados: ")))
+                        pais["superficie"] = superficie
+                        guardar_cambios(paises)
+                print("Accion realizada con éxito")
+            case _:
+                print("Opción inváida, intente nuevamente")
     else:    
-        print("El libro ingresado no existe: ")
+        print("El pais ingresado no existe: ")
         return
 
+def buscar_pais():
+    nombre = input("Ingrese el nombre del pais para obtener sus datos: ")
+    paises = obtener_paises()
+    if existe_pais(nombre):
+        for pais in paises:
+            if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
+                print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}m2, Continente: {pais["continente"]}")
+    else:
+        print("El pais ingresado no existe")
+        return
 
+def filtrar_paises():
+    paises = obtener_paises()
+    input_usuario_filtrar = input("Seleccione 'C' si desea filtrar por continente o 'P' si desea filtrar por rango de población o 'S' si desea filtrar por superficie: ").lower().strip()
+    match input_usuario_filtrar:
+        case "c":
+            continente = seleccionar_continente()
+            for pais in paises:
+                if pais["continente"].lower().strip().replace(" ","") == continente.lower().strip().replace(" ",""):
+                    print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}m2, Continente: {pais["continente"]}")
+        case "p":
+            rango_poblacional = seleccionar_poblacion()
+            for pais in paises:
+                if pais["poblacion"] >= rango_poblacional[0] and pais["poblacion"] <= rango_poblacional[1]:
+                    print(pais)
+
+filtrar_paises()
 '''   
+nombre = input("Ingrese el nombre del país: ").lower()
+cantidad_habitantes = validador(int(input("ingrese la cantidad de habitantes: ")))
+superficie = validador(int(input("Ingrese la superficie del país expresada en metros cuadrados: ")))
+continente = seleccionar_continente()
+pais = {"nombre": primera_mayuscula(nombre), "poblacion": cantidad_habitantes, "superficie": superficie, "continente": continente}
+ingresar_pais(pais)
+
+
+
 
 #El siguiente bloque de código recibe una cadena y checkea si esa cadena se encuentra dentro de los "TITULO" del csv. Devuelve un booleano, 
 #si existe devuelve "True" si no "False"
