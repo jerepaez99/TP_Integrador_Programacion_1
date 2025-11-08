@@ -28,11 +28,11 @@ tuplas_poblacionales = [
     (0, 1000000),           # Menos de 1 millón         
     (1000000, 10000000),        # Entre 1 y 10 millones
     (10000000, 100000000),      # Entre 10 y 100 millones
-    (100_000_000, None)       # Más de 100 millones
+    (100_000_000, float("inf"))       # Más de 100 millones
 ]
 
 
-rangos_superficie = [
+rangos_superficies = [
     "Menos de 10 000 km² (países muy pequeños)",
     "Entre 10 000 y 100 000 km² (países pequeños-medianos)",
     "Entre 100 000 y 1 000 000 km² (países medianos-grandes)",
@@ -40,10 +40,10 @@ rangos_superficie = [
 ]
 
 tuplas_superficie = [
-    (0, 10000),             # Menos de 10.000 km2
-    (10000, 100000),       # Entre 10.000 y 100.000 km2
-    (100000, 1000000),    # Entre 100.000 y 1.000.000 km2
-    (1000000, None)        # Más de 1.000.000 km2
+    (0, 10000),             # Menos de 10.000 kkm2
+    (10000, 100000),       # Entre 10.000 y 100.000 kkm2
+    (100000, 1000000),    # Entre 100.000 y 1.000.000 kkm2
+    (1000000, float("inf"))        # Más de 1.000.000 kkm2
 ]
 
 #El siguiente bloque de código consulta al archivo "catalogo.csv" y devuelve la lista de libros en forma de diccionarios "TITULO" - "CANTIDAD"
@@ -109,25 +109,25 @@ def seleccionar_poblacion():
             case "Más de 100 millones (gigantes demográficos)":
                 return tuplas_poblacionales[3]
             
-def superficie():
+def seleccionar_superficie():
     input_user = ""
     n = 1
     while input_user == "":
-        for rango_poblacional in rangos_poblacionales:
-            print(f"{n}: {rango_poblacional}")
+        for rango_superficie in rangos_superficies:
+            print(f"{n}: {rango_superficie}")
             n += 1
-        input_user = int(input("Seleccione un rango poblacional: "))
-        rango = rangos_poblacionales[input_user - 1]
+        input_user = int(input("Seleccione un rango de superficie: "))
+        rango = rangos_superficies[input_user - 1]
         
         match rango:
-            case "Menos de 1 millón (micro-naciones)":
-                return tuplas_poblacionales[0]
-            case "Entre 1 y 10 millones (países pequeños-medianos)":
-                return tuplas_poblacionales[1]
-            case "Entre 10 y 100 millones (países medianos-grandes)":
-                return tuplas_poblacionales[2]
-            case "Más de 100 millones (gigantes demográficos)":
-                return tuplas_poblacionales[3]
+            case "Menos de 10 000 km² (países muy pequeños)":
+                return tuplas_superficie[0]
+            case "Entre 10 000 y 100 000 km² (países pequeños-medianos)":
+                return tuplas_superficie[1]
+            case "Entre 100 000 y 1 000 000 km² (países medianos-grandes)":
+                return tuplas_superficie[2]
+            case "Más de 1 000 000 km² (países muy extensos)":
+                return tuplas_superficie[3]
 
 
 def validador(variable):
@@ -187,7 +187,7 @@ def buscar_pais():
     if existe_pais(nombre):
         for pais in paises:
             if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
-                print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}m2, Continente: {pais["continente"]}")
+                print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
     else:
         print("El pais ingresado no existe")
         return
@@ -200,14 +200,19 @@ def filtrar_paises():
             continente = seleccionar_continente()
             for pais in paises:
                 if pais["continente"].lower().strip().replace(" ","") == continente.lower().strip().replace(" ",""):
-                    print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}m2, Continente: {pais["continente"]}")
+                    print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
         case "p":
             rango_poblacional = seleccionar_poblacion()
             for pais in paises:
                 if pais["poblacion"] >= rango_poblacional[0] and pais["poblacion"] <= rango_poblacional[1]:
-                    print(pais)
+                    print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+        case "s":
+            rangos_superficie = seleccionar_superficie()
+            for pais in paises:
+                if pais["superficie"] >= rangos_superficie[0] and pais["superficie"] <= rangos_superficie[1]:
+                    print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
 
-filtrar_paises()
+
 '''   
 nombre = input("Ingrese el nombre del país: ").lower()
 cantidad_habitantes = validador(int(input("ingrese la cantidad de habitantes: ")))
