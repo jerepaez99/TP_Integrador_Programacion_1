@@ -212,6 +212,74 @@ def filtrar_paises():
                 if pais["superficie"] >= rangos_superficie[0] and pais["superficie"] <= rangos_superficie[1]:
                     print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
 
+def ordenador(criterio, orden):
+    paises = obtener_paises()
+    cantidad_paises = len(paises)
+    if orden == "d":
+        for indice_pasada in range(cantidad_paises):
+                    for indice_actual in range(cantidad_paises - 1 - indice_pasada):
+                        if paises[indice_actual][criterio] > paises[indice_actual + 1][criterio]:
+                            paises[indice_actual], paises[indice_actual + 1] = paises[indice_actual + 1], paises[indice_actual]
+        return paises.reverse()
+    else:
+        for indice_pasada in range(cantidad_paises):
+                    for indice_actual in range(cantidad_paises - 1 - indice_pasada):
+                        if paises[indice_actual][criterio] > paises[indice_actual + 1][criterio]:
+                            paises[indice_actual], paises[indice_actual + 1] = paises[indice_actual + 1], paises[indice_actual]
+        return paises
+
+
+def ordenar_paises():
+    input_usuario_ordenar = input("Seleccione 'N' si desea ordenar por nombre o 'P' si desea ordenar por población o 'S' si desea ordenar por superficie: ").lower().strip()
+    input_usuario_descendente_ascendente = input("Seleccione 'd' si desea que se puestre en orden descendente o 'a' si desea que se muestre en orden ascendente: ").lower().strip()
+    match input_usuario_ordenar:
+        case "p":
+            match input_usuario_descendente_ascendente:
+                case "a":
+                    paises = ordenador("poblacion","")
+                    for pais in paises:
+                        print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+                case "d":
+                    paises = ordenador("poblacion","d")
+                    for pais in paises:
+                        print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+                case _:
+                    print("Opción inválida, intente nuevamente")
+        case "s":
+            match input_usuario_descendente_ascendente:
+                case "a":
+                    paises = ordenador("superficie","")
+                    for pais in paises:
+                        print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+                case "d":
+                    paises = ordenador("superficie","d")
+                    for pais in paises:
+                        print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+                case _:
+                    print("Opción inválida, intente nuevamente")
+        case "n":
+            match input_usuario_descendente_ascendente:
+                case "a":
+                    paises = ordenador("nombre","")
+                    for pais in paises:
+                        print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+                case "d":
+                    paises = ordenador("nombre","d")
+                    for pais in paises:
+                        print(f"País: {pais["nombre"]}, Cantidad de Habitantes: {pais["poblacion"]}, Superficie total: {pais["superficie"]}km2, Continente: {pais["continente"]}")
+                case _:
+                    print("Opción inválida, intente nuevamente")
+        case _:
+                    print("Opción inválida, intente nuevamente")
+
+def estadisticas():
+    paises = ordenador("poblacion","")
+    mayor_poblacion = paises[-1]
+    menor_poblacion = paises[0]
+    
+    
+
+estadisticas()
 
 '''   
 nombre = input("Ingrese el nombre del país: ").lower()
