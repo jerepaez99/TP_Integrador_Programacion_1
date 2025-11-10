@@ -15,20 +15,20 @@ Arrancamos el programa:
 
 <img width="520" height="250" alt="image" src="https://github.com/user-attachments/assets/1e00eae4-9210-4c0c-a4ae-99ae2eee1ee7" />
 
-------------------------------------------------------------------------------------------------------------------------------------
+------
 
 Vamos por una de las opciones:
 
 
 <img width="406" height="150" alt="image" src="https://github.com/user-attachments/assets/77e0c376-7f7f-462b-9218-20272e6ce440" />
 
-------------------------------------------------------------------------------------------------------------------------------------
+------
 En este caso elegimos la opcion 1 y completamos con datos (No veridicos) de uganda y completamos:
 
 
 <img width="805" height="135" alt="image" src="https://github.com/user-attachments/assets/0d32e0ad-2e41-412d-84cb-3087814a4d7e" />
 
-------------------------------------------------------------------------------------------------------------------------------------
+------
 Si probamos con otro pais ya en la lista sucede lo siguiente:
 
 -  Si seleccionamos la opcion que si, nos dirije a la parte de actualizar los datos del pais:
@@ -41,12 +41,12 @@ Si probamos con otro pais ya en la lista sucede lo siguiente:
  
  <img width="511" height="351" alt="image" src="https://github.com/user-attachments/assets/e1abb5d3-0617-4b7e-b9e9-0272632ca807" />
 
------------------------------------------------------------------------------------------------------------------------------------
+-------
 Probamos tambien con introducir la cantidad de errores posibles que puede llegar a tener:
 
 <img width="570" height="516" alt="image" src="https://github.com/user-attachments/assets/8f5d0135-3612-4bf8-9229-2a676c73e981" />
 
------------------------------------------------------------------------------------------------------------------------------------
+------
 Y por ultimo probamos con el saludo de despedida:
 
 <img width="611" height="353" alt="image" src="https://github.com/user-attachments/assets/51a82d0f-af06-4b5f-9fdd-db91543293c2" />
