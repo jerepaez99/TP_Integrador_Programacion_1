@@ -154,23 +154,23 @@ def actualizar_datos():
             case "p":
                 for pais in paises:
                     if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
-                        cantidad_habitantes = validador(int(input("ingrese la nueva cantidad de habitantes: ")))
+                        cantidad_habitantes = validador(input("ingrese la nueva cantidad de habitantes: "))
                         pais["poblacion"] = cantidad_habitantes
                         guardar_cambios(paises)
                 print("Accion realizada con éxito")
             case "s":
                 for pais in paises:
                     if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
-                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en kilómetros cuadrados: ")))
+                        superficie = validador(input("Ingrese la nueva superficie del país expresada en kilómetros cuadrados: "))
                         pais["superficie"] = superficie
                         guardar_cambios(paises)
                 print("Accion realizada con éxito")
             case "a":
                 for pais in paises:
                     if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
-                        cantidad_habitantes = validador(int(input("ingrese la nueva cantidad de habitantes: ")))
+                        cantidad_habitantes = validador(input("ingrese la nueva cantidad de habitantes: "))
                         pais["poblacion"] = cantidad_habitantes
-                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en kilómetros cuadrados: ")))
+                        superficie = validador(input("Ingrese la nueva superficie del país expresada en kilómetros cuadrados: "))
                         pais["superficie"] = superficie
                         guardar_cambios(paises)
                 print("Accion realizada con éxito")
