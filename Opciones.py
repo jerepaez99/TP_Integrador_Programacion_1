@@ -47,7 +47,7 @@ while opcion != 0:
         actualizar_datos()
 
     elif opcion == 3:
-       obtener_paises()
+       buscar_pais()
 
     elif opcion == 4:
       filtrar_paises()
