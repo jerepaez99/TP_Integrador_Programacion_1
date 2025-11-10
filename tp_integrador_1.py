@@ -311,6 +311,7 @@ def estadisticas():
                 print(f"{continente} = {cantidad_continente}")     
     
 
+
 '''   
 nombre = input("Ingrese el nombre del país: ").lower()
 cantidad_habitantes = validador(int(input("ingrese la cantidad de habitantes: ")))
