@@ -46,10 +46,8 @@ tuplas_superficie = [
     (1000000, float("inf"))        # Más de 1.000.000 kkm2
 ]
 
-#El siguiente bloque de código consulta al archivo "catalogo.csv" y devuelve la lista de libros en forma de diccionarios "TITULO" - "CANTIDAD"
 def obtener_paises():
     paises = []
-    #Si el archivo no existe, lo crea
     if not os.path.exists(NOMBRE_ARCHIVO):
         with open(NOMBRE_ARCHIVO, "w", newline="", encoding="utf-8") as archivo:
             escritor = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
@@ -69,8 +67,6 @@ def guardar_cambios(paises):
     escritor.writerows(paises)
     
 
-
-#El siguiente bloque de código recibe un diccionario "TITULO" - "CANTIDAD" y agrega una nuva línea al final con los valores ingresados por el usuario
 def primera_mayuscula(str):
     return str[0].upper() + str[1:]
 
@@ -148,7 +144,6 @@ def existe_pais(nombre):
 def actualizar_datos():
     nombre = input("Ingrese el nombre del pais para actualizar sus datos: ")
     paises = obtener_paises()
-    #Checkea si existe el pais
     if existe_pais(nombre):
         input_usuario_actualizar = input("Seleccione 'p' si desea modificar la población o 's' modificar la superficie o 'a' si desea modificar ambas: ").lower().strip()
         match input_usuario_actualizar:
@@ -162,7 +157,7 @@ def actualizar_datos():
             case "s":
                 for pais in paises:
                     if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
-                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en metros cuadrados: ")))
+                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en kilómetros cuadrados: ")))
                         pais["superficie"] = superficie
                         guardar_cambios(paises)
                 print("Accion realizada con éxito")
@@ -171,7 +166,7 @@ def actualizar_datos():
                     if pais["nombre"].lower().strip().replace(" ","") == nombre.lower().strip().replace(" ",""):
                         cantidad_habitantes = validador(int(input("ingrese la nueva cantidad de habitantes: ")))
                         pais["poblacion"] = cantidad_habitantes
-                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en metros cuadrados: ")))
+                        superficie = validador(int(input("Ingrese la nueva superficie del país expresada en kilómetros cuadrados: ")))
                         pais["superficie"] = superficie
                         guardar_cambios(paises)
                 print("Accion realizada con éxito")
