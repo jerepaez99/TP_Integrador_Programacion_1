@@ -215,7 +215,8 @@ def ordenador(criterio, orden):
                     for indice_actual in range(cantidad_paises - 1 - indice_pasada):
                         if paises[indice_actual][criterio] > paises[indice_actual + 1][criterio]:
                             paises[indice_actual], paises[indice_actual + 1] = paises[indice_actual + 1], paises[indice_actual]
-        return paises.reverse()
+        paises.reverse()
+        return paises
     else:
         for indice_pasada in range(cantidad_paises):
                     for indice_actual in range(cantidad_paises - 1 - indice_pasada):
@@ -224,7 +225,9 @@ def ordenador(criterio, orden):
         return paises
 
 
-def ordenar_paises():
+
+
+def ordenar_paises():    
     input_usuario_ordenar = input("Seleccione 'N' si desea ordenar por nombre o 'P' si desea ordenar por población o 'S' si desea ordenar por superficie: ").lower().strip()
     input_usuario_descendente_ascendente = input("Seleccione 'd' si desea que se puestre en orden descendente o 'a' si desea que se muestre en orden ascendente: ").lower().strip()
     match input_usuario_ordenar:
@@ -266,6 +269,7 @@ def ordenar_paises():
                     print("Opción inválida, intente nuevamente")
         case _:
                     print("Opción inválida, intente nuevamente")
+
 
 def estadisticas():
     paises = ordenador("poblacion","")
