@@ -131,10 +131,11 @@ def seleccionar_superficie():
 
 def validador(variable):
     while True:
-        if variable <= 0:
-            variable = int(input("Ingrese un número válido "))
+        if isinstance(variable, str) and variable != "" and variable.isdigit():
+            return int(variable)
         else:
-            return variable
+            variable = input("Ingrese un número válido: ")
+
 
 def existe_pais(nombre):
   paises = obtener_paises()
