@@ -92,18 +92,19 @@ def seleccionar_poblacion():
         for rango_poblacional in rangos_poblacionales:
             print(f"{n}: {rango_poblacional}")
             n += 1
-        input_user = int(input("Seleccione un rango poblacional: "))
-        rango = rangos_poblacionales[input_user - 1]
+        input_user = input("Seleccione un rango poblacional: ")
         
-        match rango:
-            case "Menos de 1 millón (micro-naciones)":
+        match input_user:
+            case "1":
                 return tuplas_poblacionales[0]
-            case "Entre 1 y 10 millones (países pequeños-medianos)":
+            case "2":
                 return tuplas_poblacionales[1]
-            case "Entre 10 y 100 millones (países medianos-grandes)":
+            case "3":
                 return tuplas_poblacionales[2]
-            case "Más de 100 millones (gigantes demográficos)":
+            case "4":
                 return tuplas_poblacionales[3]
+            case _:
+                print("Opción inválida")
             
 def seleccionar_superficie():
     input_user = ""
@@ -112,18 +113,20 @@ def seleccionar_superficie():
         for rango_superficie in rangos_superficies:
             print(f"{n}: {rango_superficie}")
             n += 1
-        input_user = int(input("Seleccione un rango de superficie: "))
-        rango = rangos_superficies[input_user - 1]
+        input_user = input("Seleccione un rango de superficie: ")
         
-        match rango:
-            case "Menos de 10 000 km² (países muy pequeños)":
+        
+        match input_user:
+            case "1":
                 return tuplas_superficie[0]
-            case "Entre 10 000 y 100 000 km² (países pequeños-medianos)":
+            case "2":
                 return tuplas_superficie[1]
-            case "Entre 100 000 y 1 000 000 km² (países medianos-grandes)":
+            case "3":
                 return tuplas_superficie[2]
-            case "Más de 1 000 000 km² (países muy extensos)":
+            case "4":
                 return tuplas_superficie[3]
+            case _:
+                print("Opción inválida")
 
 
 def validador(variable):
@@ -223,9 +226,6 @@ def ordenador(criterio, orden):
                         if paises[indice_actual][criterio] > paises[indice_actual + 1][criterio]:
                             paises[indice_actual], paises[indice_actual + 1] = paises[indice_actual + 1], paises[indice_actual]
         return paises
-
-
-
 
 def ordenar_paises():    
     input_usuario_ordenar = input("Seleccione 'N' si desea ordenar por nombre o 'P' si desea ordenar por población o 'S' si desea ordenar por superficie: ").lower().strip()
