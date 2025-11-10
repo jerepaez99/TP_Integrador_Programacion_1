@@ -55,21 +55,28 @@ while opcion != 0:
           pais = {"nombre": primera_mayuscula(nombre), "poblacion": cantidad_habitantes, "superficie": superficie, "continente": continente}
           ingresar_pais(pais)
 
+          input("Presione una tecla para continuar ")
+
     elif opcion == 2:
         actualizar_datos()
+        input("Presione una tecla para continuar ")
 
     elif opcion == 3:
-       buscar_pais()
-
+      buscar_pais()
+      input("Presione una tecla para continuar ")
+    
     elif opcion == 4:
       filtrar_paises()
-            
+      input("Presione una tecla para continuar ")
+
     elif opcion == 5:
       ordenar_paises()
+      input("Presione una tecla para continuar ")
 
     elif opcion == 6:
       estadisticas()
-
+      input("Presione una tecla para continuar ")
+      
     elif opcion == 0:
       print("Muchas gracias, los esperamos de vuelta")
       break
