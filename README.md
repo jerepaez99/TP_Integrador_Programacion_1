@@ -2,13 +2,16 @@
 Repositorio dedicado al integrador de programación 1
 
 o Descripción del programa.
+
 Este es un proyecto integrador, presentado para la materia de programacion 1, en donde el objetivo es desarrollar una aplicación en Python que permita gestionar información sobre países, donde pondremos en practica lo aprendido a lo largo de la materia como listas, diccionarios, funciones, estructuras condicionales y repetitivas, ordenamientos y estadísticas. 
 El sistema, tambien, debe ser capaz de leer datos desde un archivo CSV, realizar consultas y generar indicadores clave a partir del dataset.
 
 o Instrucciones de uso.
+
 Se inicia el programa y cuenta con un selector de opciones, donde tiene 4 posibilidades de seleccionar correctamente las opciones disponibles, dentro de las opciones tiene diversas formas de poder realizar tanto cambios en los paises, como agregar otros o realizar consultas sobre los mismos.
 
 o Ejemplos de entradas y salidas.
+
 A continuacion realizamos algunas pruebas para que puedan verlo
 
 Arrancamos el programa:
